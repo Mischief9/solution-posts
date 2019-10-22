@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "პოსტები";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mx-auto" style="width: 200px;">
+    <input class="rounded-pill mt-3 bg-warning border-0" style="width:200px; height:30px" type="button" value="პოსტის დამატება" onclick="location.href='@Url.Action("AddPostForm", "Post")'" />
+</div>
+<hr />
+<div class="container">
+    <div class="row ">
+
+        @for (int i = 0; i < ViewBag.List.Count; i++)
+        {
+        <div class="col-lg-6">
+
+            <h1 class="mt-4 text-center" style="word-wrap:break-word;">@ViewBag.List[i].Title</h1>
+            <hr>
+            <img class="img-fluid rounded" src=@ViewBag.List[i].ImageURL style="height:400px; width:900px;" alt="">
+            <hr>
+            @if (@ViewBag.List[i].Description.Length > 180)
+            {
+                <p class="lead">@ViewBag.List[i].Description.Substring(0, 160)...</p>
+            }
+            else
+            {
+                <p class="lead">@ViewBag.List[i].Description</p>
+            }
+            <small>@ViewBag.List[i].Date.Day/@ViewBag.List[i].Date.Month/@ViewBag.List[i].Date.Year</small>
+            <button class="btn btn-warning float-right"  onclick="location.href ='@Url.Action("FullPost", "Post")/@ViewBag.List[i].ID'">სრულად ნახვა</button>
+
+        </div>
+        }
+    </div>
+</div>
+@if (ViewBag.List.Count == 0)
+{
+    <h2 class="text-center">პოსტები არ არის.</h2>
+}

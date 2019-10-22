@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = ViewBag.Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mx-auto mb-5 col-sm-7">
+    <h1 class="mt-4 text-center post-title mt-1">@ViewBag.Model.Title</h1>
+    <img class="img-fluid rounded" src=@ViewBag.Model.ImageURL style="height:400px; width:900px; margin:auto;display:block;" alt="სურათი"></img>
+    <p class="lead text-center">@ViewBag.Model.Description</p>
+    <small>@ViewBag.Model.Date.Day/@ViewBag.Model.Date.Month/@ViewBag.Model.Date.Year</small>
+    <button class="btn btn-warning float-right" onclick="location.href='@Url.Action("ChangePostForm","Post")/@ViewBag.Model.ID'">რედაქტირება</button>
+</div>

@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "მთავარი გვერდი";
+}
+
+<h2 class="text-center mt-3">შემთხვევითი პოსტი</h2>
+<hr/>
+@{ 
+    Random rand=new Random();
+
+    if (!(ViewBag.List.Count == 0))
+    {
+        int value = rand.Next(0, ViewBag.List.Count);
+        <div class="mx-auto mb-5 col-sm-6">
+            <h1 class="mt-4 text-center post-title mt-1">@ViewBag.List[value].Title</h1>      
+            <img class="img-fluid rounded" src=@ViewBag.List[value].ImageURL style="height:400px; width:900px; margin:auto;display:block;" alt="">  
+            @if (@ViewBag.List[value].Description.Length > 210)
+            {
+                <p class="lead text-center" >@ViewBag.List[value].Description.Substring(0, 200)...</p>
+            }
+            else
+            {
+                <p class="lead text-center">@ViewBag.List[value].Description</p>
+            }
+            <small>@ViewBag.List[value].Date.Day/@ViewBag.List[value].Date.Month/@ViewBag.List[value].Date.Year</small>
+            <button class="btn btn-warning float-right"  onclick="location.href ='@Url.Action("FullPost", "Post")/@ViewBag.List[value].ID'">სრულად ნახვა</button>
+        </div>
+        
+    }
+    
+}
+
+

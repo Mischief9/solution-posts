@@ -1,0 +1,41 @@
+﻿@model Posts.Models.PostModel;
+
+@{
+    ViewData["Title"] = "პოსტები - პოსტის დამატება";
+ Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        @using (Html.BeginForm("AddPost", "Post", FormMethod.Post, new { @class = "col-sm-6 mt-5 mb-5" }))
+        {
+            @if (ViewBag.Button == "რედაქტირება")
+            {
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.ID)
+                </div>
+            }
+            <div class="form-group">
+                <label for="PostTitle">სათაური</label>
+                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control", @maxLength = "50" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="description">პოსტის არწერა</label>
+                @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", rows = "5" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="link">სურათის მისამართი (URL LINK)</label>
+                @Html.EditorFor(m => m.ImageURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImageURL, "", new { @class = "text-danger" })
+                <p style="color:red">@ViewBag.InvalidURL</p>
+            </div>
+            <button type="submit" class="rounded-pill border-0 bg-success" style="width:150px; height:35px;">@ViewBag.Button</button>
+        }
+        <div class="col-sm-3 "></div>
+    </div>
+</div>
+<hr />
